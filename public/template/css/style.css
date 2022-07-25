@@ -1,0 +1,34 @@
+body {
+  font-family: Helvetica, arial, sans-serif;
+}
+
+/* img:hover {
+  height: 100px;
+} */
+
+
+.judul {
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* #content { */
+/* background-image: url(/img/background.png); */
+/* background-color: #1CC88A; */
+/* background-color: #13865D; */
+/* } */
+
+#home {
+  background: linear-gradient(#1BC588, #17aa74);
+}
+
+.main {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5%;
+}
+
+#main_utama {
+  padding-top: 5%;
+}

@@ -2,24 +2,28 @@ body {
   font-family: Helvetica, arial, sans-serif;
 }
 
-/* img:hover {
-  height: 100px;
-} */
-
-
 .judul {
   padding: 15px;
-  margin-bottom: 20px;
 }
 
-/* #content { */
-/* background-image: url(/img/background.png); */
-/* background-color: #1CC88A; */
-/* background-color: #13865D; */
-/* } */
+nav {
+  background-color: whitesmoke;
+}
+
+
 
 #home {
-  background: linear-gradient(#1BC588, #17aa74);
+  /* background: linear-gradient(#1BC588, #17aa74); */
+  /* background-color: #97d4d7; */
+  background-color: #01e2a0;
+}
+
+#foto {
+  border-radius: 50px;
+}
+
+.button1 {
+  background-color: #004a33;
 }
 
 .main {
@@ -31,4 +35,26 @@ body {
 
 #main_utama {
   padding-top: 5%;
+}
+
+.card1 {
+  box-shadow: 0 4px 8px 0 #008a61;
+  border-radius: 5px;
+  padding: 20px;
+  background: whitesmoke;
+}
+
+.card_judul {
+  margin: 0 auto;
+  width: 60%;
+  border-radius: 30px;
+  text-align: center;
+  padding: 5px;
+  margin-top: -50px;
+  margin-bottom: 20px;
+  background-color: #008a61;
+}
+
+footer {
+  background-color: whitesmoke;
 }

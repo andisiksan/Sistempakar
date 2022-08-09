@@ -26,9 +26,9 @@ class AuthFilter implements FilterInterface
             if (session()->get('role_id') == 2) {
                 return redirect()->to('/dashboard');
             } elseif (session()->get('role_id') == 3) {
-                return redirect()->to('/home/diagnosa');                # code...
+                return redirect()->to('/home');                # code...
             } else {
-                return redirect()->to('/admin');
+                return redirect()->to('/home');
             }
         }
     }

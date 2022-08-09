@@ -27,6 +27,7 @@
                 <tr>
                     <th>No</th>
                     <th>Gejala</th>
+                    <th>Cf Pakar</th>
                     <th>Penyakit</th>
                     <th>aksi</th>
                 </tr>
@@ -41,6 +42,7 @@
                     <tr>
                         <th><?= $no++; ?></th>
                         <td><?= $g['input_gejala']; ?></td>
+                        <td><?= $g['cf_pakar']; ?></td>
                         <td>
                             <!-- <select name="penyakit" class="form-control" id="exampleFormControlSelect1">
                                 <option value=""></option>

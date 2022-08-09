@@ -28,6 +28,41 @@
         </div>
     </div>
 </div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered text-dark" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($user as $u) : {
+                    } ?>
+                    <tr>
+                        <td><?= $u['id'] ?></td>
+                        <td><?= $u['name'] ?></td>
+                        <td><?= $u['email'] ?></td>
+                        <?php if ($u["role_id"] == 2) : ?>
+                            <td>Admin</td>
+                            <td></td>
+                        <?php else : ?>
+                            <td>User</td>
+                            <td>
+                                <button>role</button>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 <?= $this->endSection(); ?>

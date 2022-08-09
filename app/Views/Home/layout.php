@@ -36,23 +36,36 @@
     <div class="main">
         <nav class="navbar navbar-expand-lg navbar-light border-bottom ">
             <div class="container">
-                <a class="navbar-brand text-white" href="#">Sistem Pakar</a>
+                <a class="navbar-brand" href="#">Sistem Pakar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link text-white" href="/home/index">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/home/index">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">About</a>
+                            <a class="nav-link menu" id="menuAbout" href="/home/about">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Login</a>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <?= session()->get('name'); ?>
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <!-- <img class="img-profile rounded-circle border-5" src="<?= base_url() ?>/img/gambar_1.png" width="30px" height="20px"> -->
+                            </a>
+                            <!-- Dropdown - Admin Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="<?= base_url() ?>/admin">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="<?= base_url() ?>/auth/logout" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -60,31 +73,49 @@
         </nav>
 
         <!-- Page Heading -->
-        <h1 class="judul h3 text-center text-white font-weight-bold"><?= $title; ?></h1>
+        <h1 class="judul h2 text-center font-weight-bold text-white"><?= $title; ?></h1>
+        <h5 class="judul h5 text-center bold text-white"><?= $subtitle; ?></h5>
 
-        <div class="container-fluid bg_conten">
+        <div class="container-fluid bg_conten" id='container'>
 
             <!-- content -->
-            <?= $this->renderSection('content'); ?>
-
+            <div id="content">
+                <?= $this->renderSection('content'); ?>
+            </div>
 
         </div>
     </div>
 
-
-
-
-
-
-
     <!-- Footer -->
-    <footer class="sticky-footer bg-success">
+    <footer class="sticky-footer">
         <div class="container my-auto">
-            <div class="copyright text-center text-white my-auto">
+            <div class="copyright text-center my-auto">
                 <span>Copyright &copy; AndiIksanAdiKusuma 2022</span>
             </div>
         </div>
     </footer>
+
+
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-success" href="<?= base_url(); ?>/auth/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Bootstrap core JavaScript-->
@@ -98,11 +129,15 @@
     <script src="<?= base_url() ?>/template/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="<?= base_url() ?>/template/vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="<?= base_url() ?>/template/vendor/chart.js/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
-    <script src="<?= base_url() ?>/template/js/demo/chart-area-demo.js"></script>
-    <script src="<?= base_url() ?>/template/js/demo/chart-pie-demo.js"></script>
+    <!-- <script src="<?= base_url() ?>/template/js/demo/chart-area-demo.js"></script>
+    <script src="<?= base_url() ?>/template/js/demo/chart-pie-demo.js"></script> -->
+
+    <div id="script">
+        <?= $this->renderSection('script'); ?>
+    </div>
 
 </body>
 

@@ -2,7 +2,7 @@
 <?= $this->section('content'); ?>
 
 
-<form class="admin" method="post" action="/auth/register">
+<form class="admin" method="post" action="<?= base_url() ?>/auth/register">
     <?= csrf_field(); ?>
     <div class="form-group">
         <input type="text" value="<?= old('name'); ?>" class="form-control form-control-admin <?= ($validation->hasError('name')) ? 'is-invalid' : ''; ?>" id="name" name="name" placeholder="Full name">

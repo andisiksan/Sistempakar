@@ -3,100 +3,54 @@
 
 
 <div class="wrapper main" id="main_utama">
-    <div class="container main">
-        <h4 class="header-text text-white">Berdasarkan Gejala-Gejala yang telah dipilih,maka anda mengalami penyakit:</h4>
-        <div class="row">
-            <div class="col-6">
-                <table class="table table-bordered text-white">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Penyakit</th>
-                            <th scope="col">Persentase</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>100%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <h4 class="header-text text-white">kami menganjurkan untuk mengkonsumsi makanan ini :</h4>
-        <div class="row">
-            <div class="col-6">
-                <table class="table table-bordered text-white">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Penyakit</th>
-                            <th scope="col">Persentase</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>100%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="container ">
 
-        </div>
-        <h4 class="header-text text-white">kami menganjurkan untuk tidak mengkonsumsi makanan ini :</h4>
         <div class="row">
-            <div class="col-6">
-                <table class="table table-bordered text-white">
-                    <thead>
+            <div class="col-lg-4">
+                <div class="card1 mb-5 ">
+                    <div class="card_judul">
+                        <h5 class="header-text text-white">Persentase Penyakit</h5>
+                    </div>
+                    <table border="1">
                         <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Penyakit</th>
-                            <th scope="col">Persentase</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>100%</td>
+                            <th>Nama gejala yang dipilih</th>
+                            <th>Value</th>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                            <td>
 
+                            </td>
+                            <td>
+                                <?php foreach ($gejala as $g) : ?>
+                                    <?= $g['id_gejala']; ?>
+                                <?php endforeach; ?>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card1">
+                    <form action="" method="POST">
+                        <div class="card_judul">
+                            <h5 class="header-text text-white">Rekomendasi & Larangan</h5>
+                        </div>
+                        <p>Rekomendasi</p>
+                        <ul>
+
+                        </ul>
+                        <p>Larangan</p>
+                        <ul>
+                            <li>okokok</li>
+                            <li>okokok</li>
+                            <li>okokok</li>
+                            <li>okokok</li>
+                            <li>okokok</li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 <?= $this->endSection(); ?>

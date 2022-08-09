@@ -36,7 +36,7 @@ class Filters extends BaseConfig
         'before' => [
             'authFilter' => ['except' => [
                 '/', '/auth/login', '/auth', '/home', '/home/*',
-                '/auth/registration', '/auth/logout'
+                '/auth/*'
             ]]
             // 'honeypot',
             // 'csrf',
@@ -47,6 +47,7 @@ class Filters extends BaseConfig
                 '/home', '/home/*',
                 '/dashboard', '/dashboard/*',
                 '/gejala', '/gejala/*',
+                '/aturan', '/aturan/*',
                 '/penyakit', '/penyakit/*',
                 '/makanan', '/makanan/*',
                 '/admin', '/admin/*', '/auth/registration', '/auth/logout',

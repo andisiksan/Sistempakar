@@ -9,9 +9,8 @@
                     <?= csrf_field(); ?>
                     <label for="input_gejala">Masukkan Gejala</label>
                     <input type="text" name="input_gejala" class="form-control" id="input_gejala">
-
-                    <!-- <label for="input_penyakit">Masukkan Penyakit</label>
-                    <input type="text" name="input_penyakit" class="form-control" id="input_penyakit"> -->
+                    <label for="cf_pakar">Masukkan Cf Pakar</label>
+                    <input type="text" name="cf_pakar" class="form-control" id="cf_pakar">
 
                     <div class="form-group">
                         <label for="penyakit" class="form-label">Penyakit</label>

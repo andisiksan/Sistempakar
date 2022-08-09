@@ -76,7 +76,7 @@ class Auth extends BaseController
             'email' => htmlspecialchars($this->request->getVar('email')),
             'image' => 'defaultUser.jpg',
             'password' => password_hash($this->request->getVar('password1'), PASSWORD_DEFAULT),
-            'role_id' => 2,
+            'role_id' => 3,
             'is_active' => 1
         ]);
 
@@ -115,29 +115,21 @@ class Auth extends BaseController
 
         // admin ada
         if ($admin) {
-
-            // jika admin aktiv
-            if ($admin['is_active'] == 1) {
-
-                // cek password
-                if (password_verify($password, $admin['password'])) {
-                    $data = [
-                        'name' => $admin['name'],
-                        'email' => $admin['email'],
-                        'image' => $admin['image'],
-                        'role_id' => $admin['role_id']
-                    ];
-
-                    session()->set($data);
-
+            if (password_verify($password, $admin['password'])) {
+                $data = [
+                    'name' => $admin['name'],
+                    'email' => $admin['email'],
+                    'image' => $admin['image'],
+                    'role_id' => $admin['role_id']
+                ];
+                session()->set($data);
+                if ($admin['role_id'] == 2) {
                     return redirect()->to('/admin');
                 } else {
-                    session()->setFlashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Worng password!');
-                    return redirect()->to('/auth');
+                    return redirect()->to('/home');
                 }
             } else {
-                session()->setFlashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">This Email has not been activated!');
-
+                session()->setFlashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Worng password!');
                 return redirect()->to('/auth');
             }
         } else {

@@ -9,7 +9,7 @@ class GejalaModels extends Model
     protected $table = 'gejala';
     protected $useTimestamps = true;
     protected $primaryKey = 'id_gejala';
-    protected $allowedFields = ['input_gejala', 'id_penyakit'];
+    protected $allowedFields = ['input_gejala', 'id_penyakit', 'cf_pakar'];
 
     public function getGejala()
     {
@@ -22,5 +22,16 @@ class GejalaModels extends Model
     {
         return $this
             ->where(['id_gejala' => $id_gejala])->first();
+    }
+
+    public function selectpenyakit($penyakit = false)
+    {
+        if ($penyakit == false) {
+            return $this
+                ->findAll();
+        }
+        return $this
+            ->like('id_penyakit', $penyakit)
+            ->findAll();
     }
 }

@@ -53,11 +53,12 @@ class Gejala extends BaseController
             ]
 
         )) {
-            return \redirect()->to('/gejala/create');
+            return redirect()->to('/gejala/create');
         }
 
         if ($this->gejalamodels->save([
             'input_gejala' => $this->request->getVar("input_gejala"),
+            'cf_pakar' => $this->request->getVar("cf_pakar"),
             'id_penyakit' => $this->request->getVar("penyakit"),
         ])) {
             session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan');

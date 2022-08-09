@@ -11,13 +11,9 @@
                     <div class="mb- mt-4">
                         <label for="input_gejala">Ubah Gejala</label>
                         <input value="<?= $gejala['input_gejala'] ?>" type="text" name="input_gejala" class="form-control" id="input_gejala">
+                        <label for="cf_pakar">Ubah Gejala</label>
+                        <input value="<?= $gejala['cf_pakar'] ?>" type="text" name="cf_pakar" class="form-control" id="cf_pakar">
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="kategori" class="form-label">Penyakit</label>
-                        <select name="kategori" class="form-control" id="exampleFormControlSelect1">
-                            <option value=""> </option>
-                        </select>
-                    </div> -->
                     <button type="submit" class="btn btn-success mt-3 mb-4">Submit</button>
                 </form>
             </div>

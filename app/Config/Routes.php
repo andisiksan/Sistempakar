@@ -33,12 +33,47 @@ $routes->setAutoRoute(true);
  * Route Definitions
  * --------------------------------------------------------------------
  */
+if (session()->get('role_id') == 3) {
+    $routes->get('/admin', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/admin/(:any)', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/dashboard', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/dashboard/(:any)', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/gejala', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/gejala/(:any)', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/makanan', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/makanan/(:any)', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/penyakit', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+    $routes->get('/penyakit/(:any)', function () {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException();
+    });
+}
+
+
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/home', 'Home::index');
 
 $routes->get('/auth', 'Auth::index');
+$routes->post('/auth/register', 'Auth::register');
 $routes->get('/auth/login', 'Auth::login');
 $routes->get('/auth/logout', 'Auth::logout');
 
@@ -57,6 +92,9 @@ $routes->get('/penyakit', 'Penyakit::index');
 
 
 $routes->get('/makanan', 'Makanan::index');
+
+// data api
+$routes->post('/home/data-gejala', 'Home::dataGejala');
 
 /*
 * --------------------------------------------------------------------

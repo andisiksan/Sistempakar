@@ -16,4 +16,6 @@ class PenyakitModels extends Model
         return $this
             ->where(['id_penyakit' => $id_penyakit])->first();
     }
+
+    
 }

@@ -87,6 +87,11 @@ $routes->get('/gejala', 'Gejala::index');
 $routes->get('/penyakit', 'Penyakit::index');
 
 
+$routes->get('/konsultasi', 'Konsultasi::index');
+$routes->post('/konsultasi', 'Konsultasi::konsul');
+$routes->get('/konsultasi/(:num)', 'Konsultasi::hasil/$1');
+
+
 // $routes->get('/gejala/(:num)', 'Gejala::index/$1');
 // $routes->delete('/gejala/delete/(:segment)', 'Gejala::delete/$1');
 

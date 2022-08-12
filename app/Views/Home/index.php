@@ -55,7 +55,7 @@
 
                         </div>
                         <div class="col-6">
-                            <a href="<?= base_url('/home/hasilDiagnosa'); ?>" class="btn btn-success button1">
+                            <a href="<?= base_url('/konsultasi'); ?>" class="btn btn-success button1">
                                 <i class="fa fa-play"></i> Cek Makanan
                             </a>
                         </div>

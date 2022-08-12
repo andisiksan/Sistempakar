@@ -49,6 +49,7 @@ class Filters extends BaseConfig
                 '/gejala', '/gejala/*',
                 '/aturan', '/aturan/*',
                 '/penyakit', '/penyakit/*',
+                '/konsultasi', '/konsultasi/*',
                 '/makanan', '/makanan/*',
                 '/admin', '/admin/*', '/auth/registration', '/auth/logout',
             ]],

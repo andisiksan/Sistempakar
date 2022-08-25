@@ -24,10 +24,11 @@
     <div class="table-responsive">
         <table class="table table-bordered text-dark" id="dataTable" width="100%" cellspacing="0">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>No</th>
                     <th>Nama Makanan</th>
                     <th>Detail Makanan</th>
+                    <th>Penyakit</th>
                     <th>Status</th>
                     <th>aksi</th>
                 </tr>
@@ -41,35 +42,31 @@
 
                     <tr>
                         <th><?= $no++; ?></th>
-                        <td><?= $m['nama_makanan']; ?></td>
-                        <td><?= $m['detail_makanan']; ?></td>
+                        <td><?= $m['namaMakanan']; ?></td>
+                        <td><?= $m['detailMakanan']; ?></td>
+                        <td><?= $m['namaPenyakit']; ?></td>
                         <td><?= $m['status']; ?></td>
-                        <!-- <td>
-                            <select name="penyakit" class="form-control" id="exampleFormControlSelect1">
-                                <option value=""></option>
-                            </select>
-                        </td> -->
-                        <td>
 
+                        <td class="col-2">
                             <!-- edit -->
-                            <a href="<?= base_url(); ?>/makanan/edit/<?= $m['id_makanan'] ?>" type="button" class="btn btn-warning">Edit</a>
+                            <a href="<?= base_url(); ?>/makanan/edit/<?= $m['idMakanan'] ?>" type="button" class="btn btn-warning">Edit</a>
 
                             <!-- hapus -->
-                            <a href="" data-toggle="modal" data-target="#modal<?= $m['id_makanan'] ?>" type="button" class="btn btn-danger">Hapus</a>
+                            <a href="" data-toggle="modal" data-target="#modal<?= $m['idMakanan'] ?>" type="button" class="btn btn-danger">Hapus</a>
                             <!-- Modal -->
-                            <div class="modal fade" id="modal<?= $m['id_makanan'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="modal<?= $m['idMakanan'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Apakah Anda Yakin Ingin Menghapus <?= $m['nama_makanan'] ?></h5>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Apakah Anda Yakin Ingin Menghapus <?= $m['namaMakanan'] ?></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                            <form action="<?= base_url(); ?>/makanan/delete/<?= $m['id_makanan']; ?>" method="POST" class="d-inline">
-                                                <input type="hidden" name="_method" value="DELETE">
+                                            <form action="<?= base_url(); ?>/makanan/delete/<?= $m['idMakanan']; ?>" method="POST" class="d-inline">
+                                                <input type="hidden" name="_method" value="">
                                                 <button type="submit" class="btn btn-danger">Hapus</button>
                                             </form>
                                         </div>

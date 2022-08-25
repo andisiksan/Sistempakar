@@ -13,8 +13,6 @@ nav {
 
 
 #home {
-  /* background: linear-gradient(#1BC588, #17aa74); */
-  /* background-color: #97d4d7; */
   background-color: #01e2a0;
 }
 
@@ -25,7 +23,7 @@ nav {
 .button1 {
   background-color: #004a33;
 }
-
+  
 .main {
   flex-direction: column;
   justify-content: space-between;

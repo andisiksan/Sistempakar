@@ -67,8 +67,8 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
-                            Total Pengetahuan</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"> <?= $penyakit; ?></div>
+                            Total Pasien</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"> <?= $pasien; ?></div>
                     </div>
                     <div class="col-auto">
                         <i class="fa-solid fa-flask fa-4x text-gray-300"></i>

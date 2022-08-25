@@ -8,12 +8,20 @@ class MakananModels extends Model
 {
     protected $table = 'makanan';
     // protected $useTimestamps = true;
-    protected $primaryKey = 'id_makanan';
-    protected $allowedFields = ['id_makanan', 'id_penyakit', 'nama_makanan', 'detail_makanan', 'status'];
+    protected $primaryKey = 'idMakanan';
+    protected $allowedFields = ['idMakanan', 'idPenyakit', 'namaMakanan', 'detailMakanan', 'status'];
 
-    public function editMakanan($id_makanan)
+    public function editMakanan($idMakanan)
     {
         return $this
-            ->where(['id_makanan' => $id_makanan])->first();
+            ->join('penyakit', 'penyakit.idPenyakit  = makanan.idPenyakit')
+            ->where(['idMakanan' => $idMakanan])->first();
+    }
+
+    public function getPenyakit()
+    {
+        return $this
+            ->join('penyakit', 'penyakit.idPenyakit  = makanan.idPenyakit')
+            ->findAll();
     }
 }

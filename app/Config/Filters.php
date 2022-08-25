@@ -35,7 +35,7 @@ class Filters extends BaseConfig
     public $globals = [
         'before' => [
             'authFilter' => ['except' => [
-                '/', '/auth/login', '/auth', '/home', '/home/*',
+                '/', '/auth/login', '/auth', '/home', '/home/*', '/konsultasi',
                 '/auth/*'
             ]]
             // 'honeypot',
@@ -51,7 +51,7 @@ class Filters extends BaseConfig
                 '/penyakit', '/penyakit/*',
                 '/konsultasi', '/konsultasi/*',
                 '/makanan', '/makanan/*',
-                '/admin', '/admin/*', '/auth/registration', '/auth/logout',
+                '/user', '/user/*', '/auth/registration', '/auth/logout',
             ]],
             'toolbar',
             // 'honeypot',

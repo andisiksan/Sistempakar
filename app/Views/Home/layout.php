@@ -48,25 +48,38 @@
                         <li class="nav-item">
                             <a class="nav-link menu" id="menuAbout" href="/home/about">About</a>
                         </li>
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?= session()->get('name'); ?>
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                <!-- <img class="img-profile rounded-circle border-5" src="<?= base_url() ?>/img/gambar_1.png" width="30px" height="20px"> -->
-                            </a>
-                            <!-- Dropdown - Admin Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="<?= base_url() ?>/admin">
+
+                        <?php if (session()->get('name')) : ?>
+
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <?= session()->get('name'); ?>
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    <!-- <img class="img-profile rounded-circle border-5" src="<?= base_url() ?>/img/gambar_1.png" width="30px" height="20px"> -->
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="<?= base_url() ?>/auth/logout" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
+                                <!-- Dropdown - Admin Information -->
+
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <?php if (session()->get('role_id') == 2) : ?>
+                                        <a class="dropdown-item" href="<?= base_url() ?>/user">
+                                        <?php else : ?>
+                                            <a class="dropdown-item" href="<?= base_url() ?>/konsultasi/user">
+                                            <?php endif; ?>
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Profile
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="<?= base_url() ?>/auth/logout" data-toggle="modal" data-target="#logoutModal">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Logout
+                                            </a>
+                                </div>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item">
+                                <a class="nav-link menu" id="menuLogin" href="/auth">Login</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -74,7 +87,6 @@
 
         <!-- Page Heading -->
         <h1 class="judul h2 text-center font-weight-bold text-white"><?= $title; ?></h1>
-        <h5 class="judul h5 text-center bold text-white"><?= $subtitle; ?></h5>
 
         <div class="container-fluid bg_conten" id='container'>
 

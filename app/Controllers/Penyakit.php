@@ -37,8 +37,8 @@ class Penyakit extends BaseController
     {
         if (!$this->validate(
             [
-                'nama_penyakit' => [
-                    'rules' => 'required[penyakit.nama_penyakit]',
+                'namaPenyakit' => [
+                    'rules' => 'required[penyakit.namaPenyakit]',
                     'errors' => [
                         'required' => '{field} input harus diisi',
                     ]
@@ -50,8 +50,8 @@ class Penyakit extends BaseController
         }
 
         if ($this->penyakitmodels->save([
-            'nama_penyakit' => $this->request->getVar("nama_penyakit"),
-            'tentang_penyakit' => $this->request->getVar("tentang_penyakit"),
+            'namaPenyakit' => $this->request->getVar("namaPenyakit"),
+            'detailPenyakit' => $this->request->getVar("detailPenyakit"),
         ])) {
             session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan');
             return redirect()->to('/penyakit');
@@ -62,19 +62,19 @@ class Penyakit extends BaseController
         return redirect()->to('/penyakit');
     }
     // delete
-    public function delete($id_penyakit)
+    public function delete($idPenyakit)
     {
-        $this->penyakitmodels->delete($id_penyakit);
+        $this->penyakitmodels->delete($idPenyakit);
         session()->setFlashdata('pesan', 'Data Berhasil Di Hapus');
         return redirect()->to('/penyakit');
     }
 
     // edit
-    public function edit($id_penyakit)
+    public function edit($idPenyakit)
     {
         $data = [
             'title' => 'Edit Penyakit',
-            'penyakit' => $this->penyakitmodels->editPenyakit($id_penyakit),
+            'penyakit' => $this->penyakitmodels->editPenyakit($idPenyakit),
         ];
         return view('penyakit/edit', $data);
     }
@@ -83,9 +83,9 @@ class Penyakit extends BaseController
     public function update()
     {
         if ($this->penyakitmodels->save([
-            'id_penyakit' => $this->request->getVar("id_penyakit"),
-            'nama_penyakit' => $this->request->getVar("nama_penyakit"),
-            'tentang_penyakit' => $this->request->getVar("tentang_penyakit"),
+            'idPenyakit' => $this->request->getVar("idPenyakit"),
+            'namaPenyakit' => $this->request->getVar("namaPenyakit"),
+            'detailPenyakit' => $this->request->getVar("detailPenyakit"),
         ])) {
             session()->setFlashdata('pesan', 'Data Berhasil Di Ubah');
             return redirect()->to('/penyakit');

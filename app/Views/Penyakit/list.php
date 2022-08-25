@@ -24,7 +24,7 @@
     <div class="table-responsive">
         <table class="table table-bordered text-dark" id="dataTable" width="100%" cellspacing="0">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>No</th>
                     <th>Nama Penyakit</th>
                     <th>Tentang Penyakit</th>
@@ -40,32 +40,32 @@
 
                     <tr>
                         <th><?= $no++; ?></th>
-                        <td><?= $p['nama_penyakit']; ?></td>
-                        <td><?= $p['tentang_penyakit']; ?></td>
+                        <td><?= $p['namaPenyakit']; ?></td>
+                        <td><?= $p['detailPenyakit']; ?></td>
                         <!-- <td>
                             <select name="penyakit" class="form-control" id="exampleFormControlSelect1">
                                 <option value=""></option>
                             </select>
                         </td> -->
-                        <td>
+                        <td class="col-2">
                             <!-- edit -->
-                            <a href="<?= base_url(); ?>/penyakit/edit/<?= $p['id_penyakit'] ?>" type="button" class="btn btn-warning">Edit</a>
+                            <a href="<?= base_url(); ?>/penyakit/edit/<?= $p['idPenyakit'] ?>" type="button" class="btn btn-warning">Edit</a>
 
                             <!-- hapus -->
-                            <a href="" data-toggle="modal" data-target="#modal<?= $p['id_penyakit'] ?>" type="button" class="btn btn-danger">Hapus</a>
+                            <a href="" data-toggle="modal" data-target="#modal<?= $p['idPenyakit'] ?>" type="button" class="btn btn-danger">Hapus</a>
                             <!-- Modal -->
-                            <div class="modal fade" id="modal<?= $p['id_penyakit'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="modal<?= $p['idPenyakit'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Apakah Anda Yakin Ingin Menghapus <?= $p['nama_penyakit'] ?></h5>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Apakah Anda Yakin Ingin Menghapus <?= $p['namaPenyakit'] ?></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                            <form action="<?= base_url(); ?>/penyakit/delete/<?= $p['id_penyakit']; ?>" method="POST" class="d-inline">
+                                            <form action="<?= base_url(); ?>/penyakit/delete/<?= $p['idPenyakit']; ?>" method="POST" class="d-inline">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="btn btn-danger">Hapus</button>
                                             </form>

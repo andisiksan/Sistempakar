@@ -24,7 +24,7 @@
     <div class="table-responsive">
         <table class="table table-bordered text-dark" id="dataTable" width="100%" cellspacing="0">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>No</th>
                     <th>Gejala</th>
                     <th>Cf Pakar</th>
@@ -41,22 +41,23 @@
 
                     <tr>
                         <th><?= $no++; ?></th>
-                        <td><?= $g['input_gejala']; ?></td>
-                        <td><?= $g['cf_pakar']; ?></td>
+                        <td><?= $g['namaGejala']; ?></td>
+
                         <td>
-                            <!-- <select name="penyakit" class="form-control" id="exampleFormControlSelect1">
-                                <option value=""></option>
-                            </select> -->
-                            <?= $g['nama_penyakit'] ?>
+                            <?= $g['role']; ?>
                         </td>
                         <td>
+                            <?= $g['namaPenyakit']; ?>
+                        </td>
+
+                        <td class="col-2">
                             <!-- edit -->
-                            <a href="<?= base_url(); ?>/gejala/edit/<?= $g['id_gejala'] ?>" type="button" class="btn btn-warning">Edit</a>
+                            <a href="<?= base_url(); ?>/gejala/edit/<?= $g['idGejala'] ?>" type="button" class="btn btn-warning">Edit</a>
 
                             <!-- hapus -->
-                            <a href="" data-toggle="modal" data-target="#modal<?= $g['id_gejala'] ?>" type="button" class="btn btn-danger">Hapus</a>
+                            <a href="" data-toggle="modal" data-target="#modal<?= $g['idGejala'] ?>" type="button" class="btn btn-danger">Hapus</a>
                             <!-- Modal -->
-                            <div class="modal fade" id="modal<?= $g['id_gejala'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="modal<?= $g['idGejala'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -67,7 +68,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                            <form action="<?= base_url(); ?>/gejala/delete/<?= $g['id_gejala']; ?>" method="POST" class="d-inline">
+                                            <form action="<?= base_url(); ?>/gejala/delete/<?= $g['idGejala']; ?>" method="POST" class="d-inline">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="btn btn-danger">Hapus</button>
                                             </form>

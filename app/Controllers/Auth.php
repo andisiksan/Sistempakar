@@ -2,15 +2,15 @@
 
 namespace App\Controllers;
 
-use App\Models\AdminModels;
+use App\Models\UserModels;
 
 class Auth extends BaseController
 {
-    protected $adminModel;
+    protected $userModel;
 
     public function __construct()
     {
-        $this->adminModel = new AdminModels();
+        $this->userModel = new UserModels();
     }
 
     public function index()
@@ -43,7 +43,7 @@ class Auth extends BaseController
 
             'email' => [
                 'label'  => 'Email',
-                'rules' => 'required|valid_email|is_unique[admin.email]',
+                'rules' => 'required|valid_email|is_unique[user.email]',
                 'errors' => [
                     'is_unique' => 'This Email has already registered.'
                 ]
@@ -71,7 +71,7 @@ class Auth extends BaseController
             return redirect()->to('/auth/registration')->withInput();
         }
 
-        $this->adminModel->save([
+        $this->userModel->save([
             'name' => htmlspecialchars($this->request->getVar('name')),
             'email' => htmlspecialchars($this->request->getVar('email')),
             'image' => 'defaultUser.jpg',
@@ -111,20 +111,20 @@ class Auth extends BaseController
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
 
-        $admin = $this->adminModel->where(['email' => $email])->first();
+        $user = $this->userModel->where(['email' => $email])->first();
 
-        // admin ada
-        if ($admin) {
-            if (password_verify($password, $admin['password'])) {
+        // user ada
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
                 $data = [
-                    'name' => $admin['name'],
-                    'email' => $admin['email'],
-                    'image' => $admin['image'],
-                    'role_id' => $admin['role_id']
+                    'name' => $user['name'],
+                    'email' => $user['email'],
+                    'image' => $user['image'],
+                    'role_id' => $user['role_id']
                 ];
                 session()->set($data);
-                if ($admin['role_id'] == 2) {
-                    return redirect()->to('/admin');
+                if ($user['role_id'] == 2) {
+                    return redirect()->to('/user');
                 } else {
                     return redirect()->to('/home');
                 }

@@ -7,12 +7,29 @@
             <div class="col-8">
                 <form action="<?= base_url(); ?>/gejala/update" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
-                    <input name="id_gejala" type="hidden" value="<?= $gejala['id_gejala']; ?>">
+                    <input name="idGejala" type="hidden" value="<?= $gejala['idGejala']; ?>">
                     <div class="mb- mt-4">
-                        <label for="input_gejala">Ubah Gejala</label>
-                        <input value="<?= $gejala['input_gejala'] ?>" type="text" name="input_gejala" class="form-control" id="input_gejala">
-                        <label for="cf_pakar">Ubah Gejala</label>
-                        <input value="<?= $gejala['cf_pakar'] ?>" type="text" name="cf_pakar" class="form-control" id="cf_pakar">
+                        <label for="namaGejala">Edit Gejala</label>
+                        <input value="<?= $gejala['namaGejala'] ?>" type="text" name="namaGejala" class="form-control" id="namaGejala">
+                        <div class="form-group">
+                            <label for="bobot" class="form-label">bobot</label>
+                            <select name="bobot" class="form-control" id="bobot">
+                                <?php foreach ($bobot as $b) : ?>
+                                    <option <?= $gejala['role'] == $b['nilai'] ? "selected" : "" ?> value="<?= $b['nilai']; ?>"><?= $b['ket'] ?> (<?= $b['nilai'] ?>)</option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="penyakit" class="form-label">Penyakit</label>
+                            <select name="penyakit" class="form-control" id="penyakit">
+                                <?php foreach ($penyakit as $p) : ?>
+                                    <option <?= $gejala['idPenyakit'] == $p['idPenyakit'] ? "selected" : "" ?> value="<?= $p['idPenyakit']; ?>"><?= $p['namaPenyakit']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+
                     </div>
                     <button type="submit" class="btn btn-success mt-3 mb-4">Submit</button>
                 </form>

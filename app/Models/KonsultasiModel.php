@@ -15,8 +15,8 @@ class KonsultasiModel extends Model
     public function getKonsul($idPasien)
     {
         return $this
-            ->join('penyakit', 'penyakit.id_penyakit=konsultasi.idPenyakit')
-            ->select('konsultasi.id, idPasien, cfHasil, nama_penyakit')
+            ->join('penyakit', 'penyakit.idPenyakit=konsultasi.idPenyakit')
+            ->select('konsultasi.id, idPasien, cfHasil, namaPenyakit')
             ->where(['idPasien' => $idPasien])->findAll();
     }
 
@@ -24,14 +24,14 @@ class KonsultasiModel extends Model
     {
 
         $konsultasi = $this
-            ->join('penyakit', 'penyakit.id_penyakit=konsultasi.idPenyakit')
-            ->select('konsultasi.id, idPasien, cfHasil, id_penyakit, nama_penyakit')
+            ->join('penyakit', 'penyakit.idPenyakit=konsultasi.idPenyakit')
+            ->select('konsultasi.id, idPasien, cfHasil, konsultasi  .idPenyakit, namaPenyakit')
             ->where(['idPasien' => $idPasien])->findAll();
 
         for ($i = 0; $i < count($konsultasi); $i++) {
             $konsultasi[$i]['dataCf'] = $this
                 ->db->table('datacf')
-                ->join('gejala', 'gejala.id_gejala=datacf.idGejala')
+                ->join('gejala', 'gejala.idGejala=datacf.idGejala')
                 ->where(['idKonsultasi' => $konsultasi[$i]['id']])
                 ->get()->getResultArray();
         }

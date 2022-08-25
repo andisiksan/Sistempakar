@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AdminModels extends Model
+class UserModels extends Model
 {
-    protected $table = 'admin';
+    protected $table = 'user';
     // protected $useTimestamps = true;
 
     // tentukan field yg boleh user isi

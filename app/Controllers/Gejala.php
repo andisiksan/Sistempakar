@@ -4,16 +4,19 @@ namespace App\Controllers;
 
 use App\Models\GejalaModels;
 use App\Models\PenyakitModels;
+use App\Models\BobotModel;
 
 class Gejala extends BaseController
 {
     protected $gejalamodels;
     protected $penyakitmodels;
+    protected $bobotmodels;
 
     public function __construct()
     {
         $this->gejalamodels = new GejalaModels();
         $this->penyakitmodels = new PenyakitModels();
+        $this->bobotmodels = new BobotModel();
     }
 
 
@@ -32,7 +35,9 @@ class Gejala extends BaseController
     {
         $data = [
             'title' => 'Tambah Gejala',
-            'gejala' => $this->gejalamodels->findAll(),
+            'bobot' => $this->bobotmodels
+                ->where(['role' => 'admin'])
+                ->findAll(),
             'penyakit' => $this->penyakitmodels->findAll(),
         ];
         return view('gejala/create', $data);
@@ -44,8 +49,8 @@ class Gejala extends BaseController
     {
         if (!$this->validate(
             [
-                'input_gejala' => [
-                    'rules' => 'required[gejala.input_gejala]',
+                'namaGejala' => [
+                    'rules' => 'required[gejala.namaGejala]',
                     'errors' => [
                         'required' => '{field} input harus diisi',
                     ]
@@ -57,9 +62,9 @@ class Gejala extends BaseController
         }
 
         if ($this->gejalamodels->save([
-            'input_gejala' => $this->request->getVar("input_gejala"),
-            'cf_pakar' => $this->request->getVar("cf_pakar"),
-            'id_penyakit' => $this->request->getVar("penyakit"),
+            'namaGejala' => $this->request->getVar("namaGejala"),
+            'role' => $this->request->getVar("role"),
+            'idPenyakit' => $this->request->getVar("penyakit"),
         ])) {
             session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan');
             return redirect()->to('/gejala');
@@ -70,19 +75,23 @@ class Gejala extends BaseController
         return redirect()->to('/home');
     }
     // delete
-    public function delete($id_gejala)
+    public function delete($idGejala)
     {
-        $this->gejalamodels->delete($id_gejala);
+        $this->gejalamodels->delete($idGejala);
         session()->setFlashdata('pesan', 'Data Berhasil Di Hapus');
         return redirect()->to('/gejala');
     }
 
     // edit
-    public function edit($id_gejala)
+    public function edit($idGejala)
     {
         $data = [
             'title' => 'Edit Gejala',
-            'gejala' => $this->gejalamodels->editGejala($id_gejala),
+            'gejala' => $this->gejalamodels->editGejala($idGejala),
+            'bobot' => $this->bobotmodels
+                ->where(['role' => 'admin'])
+                ->findAll(),
+            'penyakit' => $this->penyakitmodels->findAll(),
         ];
         return view('gejala/edit', $data);
     }
@@ -90,8 +99,10 @@ class Gejala extends BaseController
     public function update()
     {
         if ($this->gejalamodels->save([
-            'id_gejala' => $this->request->getVar('id_gejala'),
-            'input_gejala' => $this->request->getVar("input_gejala"),
+            'idGejala' => $this->request->getVar('idGejala'),
+            'namaGejala' => $this->request->getVar("namaGejala"),
+            'role' => $this->request->getVar("bobot"),
+            'idPenyakit' => $this->request->getVar("penyakit"),
         ])) {
             session()->setFlashdata('pesan', 'Data Berhasil Di Ubah');
             return redirect()->to('/gejala');

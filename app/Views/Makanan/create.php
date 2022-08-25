@@ -7,19 +7,32 @@
             <div class="col-8 mb-4">
                 <form action="<?= base_url(); ?>/makanan/save" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
-                    <label for="nama_makanan">Nama makanan</label>
-                    <input type="text" name="nama_makanan" class="form-control" id="nama_makanan">
-                    <label for="detail_makanan">Detail makanan</label>
-                    <input type="text" name="detail_makanan" class="form-control" id="detail_makanan">
-                    <label for="status">Status makanan</label>
-                    <input type="text" name="status" class="form-control" id="status">
-
-                    <!-- <div class="form-group">
-                        <label for="kategori" class="form-label">Penyakit</label>
-                        <select name="kategori" class="form-control" id="exampleFormControlSelect1">
-                            <option value=""> </option>
+                    <label for="namaMakanan">Nama makanan</label>
+                    <input type="text" name="namaMakanan" class="form-control" id="namaMakanan">
+                    <div class="form-group">
+                        <label for="detailMakanan">Detail Makanan</label>
+                        <textarea class="form-control" id="detailMakanan" rows="3" name="detailMakanan"></textarea>
+                    </div>
+                    <!-- <label for="status">Status makanan</label>
+                    <input type="text" name="status" class="form-control" id="status"> -->
+                    <!-- penyakit -->
+                    <div class="form-group">
+                        <label for="penyakit" class="form-label">penyakit</label>
+                        <select name="penyakit" class="form-control" id="penyakit">
+                            <?php foreach ($penyakit as $k) : ?>
+                                <option value="<?= $k['idPenyakit']; ?>"><?= $k['namaPenyakit']; ?></option>
+                            <?php endforeach; ?>
                         </select>
-                    </div> -->
+                    </div>
+                    <!-- status -->
+                    <div class="form-group">
+                        <label for="status" class="form-label">status</label>
+                        <select name="status" class="form-control" id="status">
+                            <option value="rekomendasi">Rekomendasi</option>
+                            <option value="larangan">Larangan</option>
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-success mt-3">Submit</button>
                 </form>
             </div>

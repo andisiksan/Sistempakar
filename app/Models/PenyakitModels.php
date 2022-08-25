@@ -8,14 +8,12 @@ class PenyakitModels extends Model
 {
     protected $table = 'penyakit';
     // protected $useTimestamps = true;
-    protected $primaryKey = 'id_penyakit';
-    protected $allowedFields = ['id_penyakit', 'nama_penyakit', 'tentang_penyakit'];
+    protected $primaryKey = 'idPenyakit';
+    protected $allowedFields = ['idPenyakit', 'namaPenyakit', 'detailPenyakit'];
 
-    public function editPenyakit($id_penyakit)
+    public function editPenyakit($idPenyakit)
     {
         return $this
-            ->where(['id_penyakit' => $id_penyakit])->first();
+            ->where(['idPenyakit' => $idPenyakit])->first();
     }
-
-    
 }

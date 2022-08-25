@@ -7,21 +7,17 @@
             <div class="col-8">
                 <form action="<?= base_url(); ?>/penyakit/update" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
-                    <input name="id_penyakit" type="hidden" value="<?= $penyakit['id_penyakit']; ?>">
+                    <input name="idPenyakit" type="hidden" value="<?= $penyakit['idPenyakit']; ?>">
                     <div class="mb- mt-4">
-
-                        <label for="input_gejala">Nama penyakit</label>
-                        <input value="<?= $penyakit['nama_penyakit'] ?>" type="text" name="nama_penyakit" class="form-control" id="nama_penyakit">
-                        <label for="input_gejala">Tentang penyakit</label>
-                        <input value="<?= $penyakit['tentang_penyakit'] ?>" type="text" name="tentang_penyakit" class="form-control" id="tentang_penyakit">
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="kategori" class="form-label">Penyakit</label>
-                        <select name="kategori" class="form-control" id="exampleFormControlSelect1">
-                            <option value=""> </option>
-                        </select>
-                    </div> -->
-                    <button type="submit" class="btn btn-success mt-3 mb-4">Submit</button>
+                        <div class="form-group">
+                            <label for="namaPenyakit">Nama penyakit</label>
+                            <input value="<?= $penyakit['namaPenyakit'] ?>" type="text" name="namaPenyakit" class="form-control" id="namaPenyakit">
+                        </div>
+                        <div class="form-group">
+                            <label for="detailPenyakit">Detail Penyakit</label>
+                            <textarea class="form-control" id="detailPenyakit" rows="3" name="detailPenyakit"><?= $penyakit['detailPenyakit'] ?>"</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3 mb-4">Submit</button>
                 </form>
             </div>
         </div>

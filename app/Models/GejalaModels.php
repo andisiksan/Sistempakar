@@ -6,32 +6,42 @@ use CodeIgniter\Model;
 
 class GejalaModels extends Model
 {
-    protected $table = 'gejala';
-    protected $useTimestamps = true;
-    protected $primaryKey = 'id_gejala';
-    protected $allowedFields = ['input_gejala', 'id_penyakit', 'cf_pakar'];
+    protected $table            = 'gejala';
+    protected $primaryKey       = 'idGejala';
+    protected $allowedFields    = ['idPenyakit', 'idGejala', 'namaGejala', 'role'];
 
     public function getGejala()
     {
         return $this
-            ->join('penyakit', 'penyakit.id_penyakit  = gejala.id_penyakit')
+            ->join('penyakit', 'penyakit.idPenyakit  = gejala.idPenyakit')
             ->findAll();
     }
 
-    public function editGejala($id_gejala)
+
+    public function editGejala($idGejala)
     {
         return $this
-            ->where(['id_gejala' => $id_gejala])->first();
+            ->where(['idGejala' => $idGejala])->first();
     }
 
-    public function selectpenyakit($penyakit = false)
+
+    public function getGejalaByPenyakit($req)
     {
-        if ($penyakit == false) {
-            return $this
-                ->findAll();
+        $getPenyakit = [];
+        foreach ($req as $key) {
+            array_push($getPenyakit, $this->db->table('penyakit')->getWhere(['idPenyakit' => $key])->getRowArray());
         }
-        return $this
-            ->like('id_penyakit', $penyakit)
-            ->findAll();
+
+        for ($i = 0; $i < count($req); $i++) {
+            foreach ($req as $key) {
+                if ($getPenyakit[$i]['idPenyakit'] == $key) {
+                    $getPenyakit[$i]['namaGejala'] = $this
+                        ->Where(['idPenyakit' => $key])
+                        ->findAll();
+                }
+            }
+        }
+
+        return $getPenyakit;
     }
 }

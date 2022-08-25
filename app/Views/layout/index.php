@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="<?= base_url(); ?>/img/gambar_1.png">
 
-    <title>Cek Larangan Makanan</title>
+    <title>Sistem Pakar</title>
 
     <!-- Custom fonts for this template-->
     <!-- <link href="<?= base_url(); ?>/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
@@ -41,10 +42,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Halo Admin</div>
+                <div class="sidebar-brand-text mx-4">Sistem Pakar</div>
             </a>
 
             <!-- Divider -->
@@ -58,7 +59,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>/admin">
+                <a class="nav-link" href="<?= base_url() ?>/user">
                     <i class="fa-solid fa-user text-gray-300"></i>
                     <span>User</span></a>
             </li>
@@ -90,13 +91,6 @@
                     <span>Penyakit</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>/aturan">
-                    <i class="fa fa-cog text-gray-300"></i>
-                    <span>Aturan</span></a>
-            </li>
-
-
             <!-- Heading -->
             <div class="sidebar-heading">
                 Halaman User
@@ -108,7 +102,6 @@
             </li>
 
 
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -116,7 +109,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -168,7 +160,7 @@
                             </a>
                             <!-- Dropdown - Admin Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="<?= base_url() ?>/admin">
+                                <a class="dropdown-item" href="<?= base_url() ?>/user">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

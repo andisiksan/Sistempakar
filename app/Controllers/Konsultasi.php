@@ -4,38 +4,43 @@ namespace App\Controllers;
 
 
 use App\Models\GejalaModels;
-use App\Models\GejalaModel;
 use App\Models\PenyakitModels;
-use App\Models\AdminModels;
+use App\Models\UserModels;
 use App\Models\BobotModel;
 use App\Models\PasienModel;
 use App\Models\KonsultasiModel;
 use App\Models\DatacfModel;
+use App\Models\MakananModels;
 
 class Konsultasi extends BaseController
 {
     public function __construct()
     {
-        $this->gejalaModels = new GejalaModels();
-        $this->gejalaModel = new GejalaModel();
+
+        $this->gejalaModel = new GejalaModels();
         $this->penyakitModels = new PenyakitModels();
-        $this->adminModels = new AdminModels();
+        $this->userModel = new UserModels();
         $this->bobotModel = new BobotModel();
         $this->pasienModel = new PasienModel();
         $this->konsultasiModel = new KonsultasiModel();
         $this->datacfModel = new DatacfModel();
+        $this->makananModels = new MakananModels();
     }
 
 
     public function index()
     {
-        $data = [
-            'title' => "konsultasi",
-            'subtitle' => "konsultasi",
-            'penyakit' => $this->penyakitModels->findAll(),
-            'selectPenyakit' => null
-        ];
-        return view('konsul/konsultasi', $data);
+        if (session()->get('email') == null) {
+            session()->setFlashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">anda harus login terlebih dahulu');
+            return redirect()->to('/auth');
+        } else {
+            $data = [
+                'title' => "konsultasi",
+                'penyakit' => $this->penyakitModels->findAll(),
+                'selectPenyakit' => null
+            ];
+            return view('konsul/konsultasi', $data);
+        }
     }
     public function konsul()
     {
@@ -48,7 +53,6 @@ class Konsultasi extends BaseController
 
         $data = [
             'title' => "konsultasi",
-            'subtitle' => "konsultasi",
             'penyakit' => $this->penyakitModels->findAll(),
             'selectPenyakit' => $gejala,
             'bobot' => $bobot
@@ -58,7 +62,7 @@ class Konsultasi extends BaseController
 
     public function create()
     {
-        $user = $this->adminModels->where(['email' => session()->get('email')])->first();
+        $user = $this->userModel->where(['email' => session()->get('email')])->first();
         $idUser = $user['id'];
         $reqIdGejala = $this->request->getVar('idGejala');
         $reqCfUser = $this->request->getVar('cfUser');
@@ -67,7 +71,7 @@ class Konsultasi extends BaseController
         $clear_duplicate_penyakit = array_unique($reqIdPenyakit);
 
         if (count($reqCfUser) != count($reqIdGejala)) {
-            session()->setFlashdata('pesanGagal', 'Gejalak Tidak Ditemukan');
+            session()->setFlashdata('pesanGagal', 'Gejala Tidak Ditemukan');
             return redirect()->to('/konsultasi');
         }
 
@@ -78,13 +82,13 @@ class Konsultasi extends BaseController
             foreach ($clear_duplicate_penyakit as $penyakit) {
                 $CFHE = [];
                 for ($i = 0; $i < count($reqIdGejala); $i++) {
-                    $getGejalaById =  $this->gejalaModel->where(['id_gejala' => $reqIdGejala[$i]])->first();
+                    $getGejalaById =  $this->gejalaModel->where(['idGejala' => $reqIdGejala[$i]])->first();
                     if (!$getGejalaById) {
                         session()->setFlashdata('pesanGagal', 'Gejala Tidak Ditemukan');
                         return redirect()->to('/konsultasi');
                     }
-                    if ($penyakit == $getGejalaById['id_penyakit']) {
-                        $CFHE[] = $getGejalaById['cf_pakar'] * $reqCfUser[$i];
+                    if ($penyakit == $getGejalaById['idPenyakit']) {
+                        $CFHE[] = $getGejalaById['role'] * $reqCfUser[$i];
                     }
                 }
 
@@ -154,14 +158,38 @@ class Konsultasi extends BaseController
             return redirect()->to('/konsultasi');
         }
     }
+
     public function hasil($idPasien)
     {
         $konsultasi = $this->konsultasiModel->getDataKonsul($idPasien);
+        $rekomendasi = [];
+        for ($i = 0; $i < count($konsultasi); $i++) {
+            $makanan = $this->makananModels
+                ->where(['idPenyakit' => $konsultasi[$i]['idPenyakit']])
+                ->where(['status' => 'rekomendasi'])
+                ->findAll();
+            for ($i2 = 0; $i2 < count($makanan); $i2++) {
+                $rekomendasi[] = $makanan[$i2];
+            }
+        }
+        $larangan = [];
+        for ($i = 0; $i < count($konsultasi); $i++) {
+
+            $makanan = $this->makananModels
+                ->where(['idPenyakit' => $konsultasi[$i]['idPenyakit']])
+                ->where(['status' => 'larangan'])
+                ->findAll();
+            for ($i2 = 0; $i2 < count($makanan); $i2++) {
+                $larangan[] = $makanan[$i2];
+            }
+        }
 
         $data = [
             'title' => "hasil konsultasi",
             'subtitle' => "hasil konsultasi",
-            'konsultasi' => $konsultasi
+            'konsultasi' => $konsultasi,
+            'rekomendasi' => $rekomendasi,
+            'larangan' => $larangan,
         ];
 
         return view('/konsul/hasil', $data);

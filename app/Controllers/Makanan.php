@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\MakananModels;
+use App\Models\PenyakitModels;
 
 class Makanan extends BaseController
 {
     protected $makananmodels;
+    protected $penyakitModels;
     public function __construct()
     {
         $this->makananmodels = new MakananModels();
+        $this->penyakitModels = new PenyakitModels();
     }
 
 
@@ -17,7 +20,7 @@ class Makanan extends BaseController
     {
         $data = [
             'title' => 'Data Makanan',
-            'makanan' => $this->makananmodels->findAll(),
+            'makanan' => $this->makananmodels->getPenyakit(),
         ];
 
         return view('makanan/list', $data);
@@ -27,6 +30,7 @@ class Makanan extends BaseController
     {
         $data = [
             'title' => 'Tambah Makanan',
+            'penyakit' => $this->penyakitModels->findAll(),
         ];
         return view('makanan/create', $data);
     }
@@ -35,8 +39,8 @@ class Makanan extends BaseController
     {
         if (!$this->validate(
             [
-                'nama_makanan' => [
-                    'rules' => 'required[makanan.nama_makanan]',
+                'namaMakanan' => [
+                    'rules' => 'required[makanan.namaMakanan]',
                     'errors' => [
                         'required' => '{field} input harus diisi',
                     ]
@@ -44,12 +48,13 @@ class Makanan extends BaseController
             ]
 
         )) {
-            return \redirect()->to('/makanan/create');
+            return redirect()->to('/makanan/create');
         }
 
         if ($this->makananmodels->save([
-            'nama_makanan' => $this->request->getVar("nama_makanan"),
-            'detail_makanan' => $this->request->getVar("detail_makanan"),
+            'namaMakanan' => $this->request->getVar("namaMakanan"),
+            'detailMakanan' => $this->request->getVar("detailMakanan"),
+            'idPenyakit' => $this->request->getVar("penyakit"),
             'status' => $this->request->getVar("status"),
         ])) {
             session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan');
@@ -61,19 +66,20 @@ class Makanan extends BaseController
         return redirect()->to('/makanan');
     }
     // delete
-    public function delete($id_makanan)
+    public function delete($idMakanan)
     {
-        $this->makananmodels->delete($id_makanan);
+        $this->makananmodels->delete($idMakanan);
         session()->setFlashdata('pesan', 'Data Berhasil Di Hapus');
         return redirect()->to('/makanan');
     }
 
     // edit
-    public function edit($id_makanan)
+    public function edit($idMakanan)
     {
         $data = [
             'title' => 'Edit Makanan',
-            'makanan' => $this->makananmodels->editMakanan($id_makanan),
+            'makanan' => $this->makananmodels->editMakanan($idMakanan),
+            'penyakit' => $this->penyakitModels->findAll(),
         ];
         return view('makanan/edit', $data);
     }
@@ -82,10 +88,10 @@ class Makanan extends BaseController
     public function update()
     {
         if ($this->makananmodels->save([
-            'id_makanan' => $this->request->getVar('id_makanan'),
-            'id_penyakit' => $this->request->getVar("id_penyakit"),
-            'nama_makanan' => $this->request->getVar("nama_makanan"),
-            'detail_makanan' => $this->request->getVar("detail_makanan"),
+            'idMakanan' => $this->request->getVar('idMakanan'),
+            'idPenyakit' => $this->request->getVar("penyakit"),
+            'namaMakanan' => $this->request->getVar("namaMakanan"),
+            'detailMakanan' => $this->request->getVar("detailMakanan"),
             'status' => $this->request->getVar("status"),
         ])) {
             session()->setFlashdata('pesan', 'Data Berhasil Di Ubah');

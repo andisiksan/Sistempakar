@@ -16,16 +16,30 @@
     <div class="card mt-3  shadow" style="max-width: 500px;">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="/img/<?= $user['image']; ?>" class="card-img">
+                <img src="/img/<?= $user['image']; ?>" class="card-img" height="100%" width="100%">
             </div>
+
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title"><?= $user['name'] ?></h5>
                     <p class="card-text"><?= $user['email'] ?></p>
-                    <?php $date = $user['created_at'];  ?>
-                    <p class="card-text"><small class="text-muted">Dibuat pada <?= date('d F Y', strtotime($date)); ?></small></p>
+                    <?php if (!empty($user['created_at'])) :
+                        $date = $user['created_at'];  ?>
+                        <p class="card-text"><small class="text-muted">Dibuat pada <?= date('d F Y', strtotime($date)); ?></small></p>
+                    <?php endif; ?>
+                    <hr>
+                    <form action="<?= base_url(); ?>/user/savegambar" method="POST" enctype="multipart/form-data">
+                        <?= csrf_field(); ?>
+                        <input name="id" type="hidden" value="<?= $user['id']; ?>">
+                        <div class="mb-3 ">
+                            <label for="gambar" class="form-label text-dark font-weight-bold">Ubah Gambar</label>
+                            <input name="image" class="form-control form-control-sm" id="gambar" type="file">
+                        </div>
+                        <button type="submit" class="btn btn-success">ganti</button>
+                    </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -38,7 +52,7 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Status</th>
-                    <th>Aksi</th>
+                    <th colspan="2">Aksi</th>
                 </tr>
             </thead>
 
@@ -49,11 +63,20 @@
                         <td><?= $u['id'] ?></td>
                         <td><?= $u['name'] ?></td>
                         <td><?= $u['email'] ?></td>
+
                         <?php if ($u["role_id"] == 2) : ?>
                             <td>Admin</td>
-                            <td><button type="button" class="btn btn-secondary" disabled>Jadikan Admin</button></td>
+                            <td>
+                                <a href="<?= base_url(); ?>/user/detail/<?= $u['id'] ?>" type="button" class="btn btn-warning">Detail User</a>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-secondary" disabled>Jadikan Admin</button>
+                            </td>
                         <?php else : ?>
                             <td>User</td>
+                            <td>
+                                <a href="<?= base_url(); ?>/user/detail/<?= $u['id'] ?>" type="button" class="btn btn-warning">Detail User</a>
+                            </td>
                             <td>
                                 <a href="" data-toggle="modal" data-target="#modal<?= $u['id'] ?>" type="button" class="btn btn-success">Jadikan Admin</a>
                                 <!-- Modal -->

@@ -22,7 +22,7 @@
 
 <div class="card-body">
     <div class="table-responsive">
-        <table class="table table-bordered text-dark" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered text-dark" id="table-makanan" width="100%" cellspacing="0">
             <thead>
                 <tr class="text-center">
                     <th>No</th>
@@ -84,5 +84,20 @@
         </table>
     </div>
 </div>
+
+<?= $this->endSection(); ?>
+
+
+<?= $this->section('scripts') ?>
+
+<script>
+    $('#table-makanan').DataTable({
+        'paging': true,
+        'columnDefs': [{
+            'searchable': false,
+            'targets': [0, 5]
+        }, ]
+    });
+</script>
 
 <?= $this->endSection(); ?>

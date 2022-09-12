@@ -2,18 +2,61 @@ body {
   font-family: Helvetica, arial, sans-serif;
 }
 
-.judul {
-  padding: 15px;
+/* navbar */
+#nav {
+  position: sticky;
+  top: 0;
+  z-index: 1001;
 }
 
-nav {
-  background-color: whitesmoke;
+.navbar {
+  background-color: #01e2a0;
+}
+
+.navbar-brand span {
+  font-weight: bold;
+  color: #fff;
+}
+
+.navbar-nav li {
+  padding: 0 10px;
+}
+
+#garisbawah:hover {
+  border-bottom: 2px solid #fff;
 }
 
 
+#banner {
+  position: relative;
+  color: #fff;
+  padding-top: 5%;
+}
+
+.title {
+  font-weight: bold;
+  margin-top: 70px;
+}
+
+.ban-img {
+  position: relative;
+  z-index: 1000;
+}
+
+#caption {
+  position: relative;
+  z-index: 1000;
+}
+
+.wave {
+  position: absolute;
+  bottom: -20%;
+  left: 0;
+}
 
 #home {
   background-color: #01e2a0;
+  min-height: 100vh;
 }
 
 #foto {
@@ -23,7 +66,7 @@ nav {
 .button1 {
   background-color: #004a33;
 }
-  
+
 .main {
   flex-direction: column;
   justify-content: space-between;
@@ -35,14 +78,18 @@ nav {
   padding-top: 5%;
 }
 
-.card1 {
+.wrapper {
+  min-height: 70vh;
+}
+
+/* .card1 {
   box-shadow: 0 4px 8px 0 #008a61;
   border-radius: 5px;
   padding: 20px;
   background: whitesmoke;
-}
+} */
 
-.card_judul {
+/* .card_judul {
   margin: 0 auto;
   width: 60%;
   border-radius: 30px;
@@ -51,8 +98,65 @@ nav {
   margin-top: -50px;
   margin-bottom: 20px;
   background-color: #008a61;
+} */
+
+#backgroundauth {
+  padding: 0px 50px;
+}
+
+#backgroundright {
+  border-radius: 5px;
+  padding-top: 15%;
+  padding-bottom: 50px;
+}
+
+#backgroundrightbot {
+  border-radius: 5px;
+  padding-top: 15%;
+  padding-bottom: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
 }
 
 footer {
-  background-color: whitesmoke;
+  background-color: #fff;
+  /* bottom: -5px; */
+}
+
+@media only screen and (max-width: 900px) {
+
+  .wrapper {
+    min-height: 80vh;
+  }
+
+  #backgroundauth {
+    display: none;
+  }
+
+  #konsulresponsive {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .wave {
+    display: none;
+  }
+
+  #judulhalaman {
+    font-size: x-large;
+  }
+
+  #caption {
+    text-align: center;
+  }
+
+  #caption h2 {
+    font-size: larger;
+  }
+
+  #caption h5 {
+    font-size: medium;
+  }
+
+
+
 }

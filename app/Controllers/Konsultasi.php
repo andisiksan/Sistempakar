@@ -34,14 +34,29 @@ class Konsultasi extends BaseController
             session()->setFlashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">anda harus login terlebih dahulu');
             return redirect()->to('/auth');
         } else {
+            $bobot = $this->bobotModel->findByRole('user');
             $data = [
                 'title' => "konsultasi",
                 'penyakit' => $this->penyakitModels->findAll(),
-                'selectPenyakit' => null
+                'selectPenyakit' => $this->gejalaModel->findAll(),
+                'bobot' => $bobot
             ];
             return view('konsul/konsultasi', $data);
         }
     }
+
+    public function detailuser()
+    {
+        $userAll = $this->userModel
+            ->where(['role_id' => 3])
+            ->findAll();
+        $data = [
+            'title' => 'Riwayat Konsultasi',
+            'userAll' => $userAll,
+        ];
+        return view('konsul/detailuser', $data);
+    }
+
     public function konsul()
     {
         $req = $this->request->getVar('id');
@@ -59,6 +74,7 @@ class Konsultasi extends BaseController
         ];
         return view('konsul/konsultasi', $data);
     }
+
 
     public function create()
     {
@@ -161,37 +177,78 @@ class Konsultasi extends BaseController
 
     public function hasil($idPasien)
     {
-        $konsultasi = $this->konsultasiModel->getDataKonsul($idPasien);
+        $konsultasis = $this->konsultasiModel->getDataKonsulTertinggi($idPasien);
+        dd($konsultasis);
+        $old = 0;
+        $oldlevel = 0;
+        $konsultasi = $konsultasis[0];
+        for ($i = 0; $i < count($konsultasis); $i++) {
+            if ($konsultasi['cfHasil'] < $konsultasis[$i]['cfHasil']) {
+                $konsultasi = $konsultasis[$i];
+            }
+            if ($konsultasi['cfHasil'] == $konsultasis[$i]['cfHasil']) {
+                if ($konsultasi['level'] < $konsultasis[$i]['level']) {
+                    $konsultasi = $konsultasis[$i];
+                }
+            }
+            $old = $konsultasis[$i]['cfHasil'];
+            $oldlevel = $konsultasis[$i]['level'];
+        }
+
+        // dd($konsultasi);
         $rekomendasi = [];
-        for ($i = 0; $i < count($konsultasi); $i++) {
-            $makanan = $this->makananModels
-                ->where(['idPenyakit' => $konsultasi[$i]['idPenyakit']])
-                ->where(['status' => 'rekomendasi'])
-                ->findAll();
-            for ($i2 = 0; $i2 < count($makanan); $i2++) {
-                $rekomendasi[] = $makanan[$i2];
-            }
+        // memecahkan penyakit
+
+        // mencari makanan berdasarkan id penyakit
+        $makanan = $this->makananModels
+            ->where(['idPenyakit' => $konsultasi['idPenyakit']])
+            ->where(['status' => 'rekomendasi'])
+            ->findAll();
+        for ($i2 = 0; $i2 < count($makanan); $i2++) {
+            $rekomendasi[] = $makanan[$i2];
         }
+
         $larangan = [];
-        for ($i = 0; $i < count($konsultasi); $i++) {
+        // memecahkan penyakit
 
-            $makanan = $this->makananModels
-                ->where(['idPenyakit' => $konsultasi[$i]['idPenyakit']])
-                ->where(['status' => 'larangan'])
-                ->findAll();
-            for ($i2 = 0; $i2 < count($makanan); $i2++) {
-                $larangan[] = $makanan[$i2];
-            }
+        // mencari makanan berdasarkan id penyakit
+        $makanan = $this->makananModels
+            ->where(['idPenyakit' => $konsultasi['idPenyakit']])
+            ->where(['status' => 'larangan'])
+            ->findAll();
+        for ($i2 = 0; $i2 < count($makanan); $i2++) {
+            $larangan[] = $makanan[$i2];
         }
-
         $data = [
             'title' => "hasil konsultasi",
             'subtitle' => "hasil konsultasi",
             'konsultasi' => $konsultasi,
             'rekomendasi' => $rekomendasi,
             'larangan' => $larangan,
+            'konsultasis' => $konsultasis,
         ];
-
         return view('/konsul/hasil', $data);
+    }
+
+    // delete
+    public function delete($idPasien)
+    {
+        $data = $this->konsultasiModel->select('id')->where(['idPasien' => $idPasien])->findAll();
+        foreach ($data as $val) {
+            $this->datacfModel->where(['idKonsultasi' => $val['id']])->delete();
+        }
+        $this->konsultasiModel
+            ->where(['idPasien' => $idPasien])->delete();
+        $delete = $this->pasienModel
+            ->where(['id' => $idPasien])->delete();
+
+        // ->where(['idKonsultasi' => $konsultasi[$i]['id']])->delete();
+
+        if ($delete) {
+            session()->setFlashdata('pesan', 'Data Berhasil Di Hapus');
+            return redirect()->to('/konsultasi/detailuser/');
+        } else {
+            session()->setFlashdata('pesan', 'Data Gagal Di Hapus');
+        }
     }
 }

@@ -54,14 +54,15 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <i class="fas fa-fw fa-tachometer-alt text-gray-300"></i>
+                    <span>Dashboard</span>
+                </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url() ?>/user">
                     <i class="fa-solid fa-user text-gray-300"></i>
-                    <span>User</span></a>
+                    <span>My Profile</span></a>
             </li>
 
             <!-- Divider -->
@@ -69,9 +70,15 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Kelolah data
+                Kelola data
             </div>
 
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url() ?>/penyakit">
+                    <i class="fa-solid fa-lungs-virus text-gray-300"></i>
+                    <span>Penyakit</span></a>
+            </li>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url() ?>/gejala">
@@ -84,12 +91,13 @@
                     <i class="fa-solid fa-bowl-rice text-gray-300"></i>
                     <span>Makanan</span></a>
             </li>
-            <!-- Nav Item - Dashboard -->
+
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>/penyakit">
-                    <i class="fa-solid fa-lungs-virus text-gray-300"></i>
-                    <span>Penyakit</span></a>
+                <a class="nav-link" href="<?= base_url() ?>/konsultasi/detailuser/">
+                    <i class="fa-solid fa-stethoscope text-gray-300"></i>
+                    <span>Riwayat Konsultasi</span></a>
             </li>
+
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -178,7 +186,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Page Heading -->
-                <h1 class="judul h3 text-center text-success font-weight-bold"><?= $title; ?></h1>
+                <h1 class="mt-4 judul h3 text-center text-success font-weight-bold"><?= $title; ?></h1>
 
 
                 <!-- Begin Page Content -->
@@ -238,11 +246,17 @@
     <script src="<?= base_url() ?>/template/vendor/jquery/jquery.min.js"></script>
     <script src="<?= base_url() ?>/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- dataTable -->
+    <script src="<?= base_url() ?>/template/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
     <!-- Core plugin JavaScript-->
     <script src="<?= base_url() ?>/template/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url() ?>/template/js/sb-admin-2.min.js"></script>
+
+
 
     <!-- Page level plugins -->
     <script src="<?= base_url() ?>/template/vendor/chart.js/Chart.min.js"></script>
@@ -251,6 +265,26 @@
     <script src="<?= base_url() ?>/template/js/demo/chart-area-demo.js"></script>
     <script src="<?= base_url() ?>/template/js/demo/chart-pie-demo.js"></script>
 
+    <?= $this->renderSection('scripts'); ?>
+
 </body>
+<script>
+    function preview() {
+
+        const image = document.querySelector('#image_id');
+        const imageLabel = document.querySelector('.custom-file-label');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imageLabel.textContent = image.files[0].name;
+
+        const fileSampul = new FileReader();
+        fileSampul.readAsDataURL(image.files[0]);
+
+        fileSampul.onload = function(e) {
+            imgPreview.src = e.target.result;
+
+        }
+    }
+</script>
 
 </html>

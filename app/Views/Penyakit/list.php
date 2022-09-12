@@ -22,7 +22,7 @@
 
 <div class="card-body">
     <div class="table-responsive">
-        <table class="table table-bordered text-dark" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered text-dark" id="table-penyakit2" width="100%" cellspacing="0">
             <thead>
                 <tr class="text-center">
                     <th>No</th>
@@ -83,5 +83,19 @@
         </table>
     </div>
 </div>
+
+<?= $this->endSection(); ?>
+
+<?= $this->section('scripts') ?>
+
+<script>
+    $('#table-penyakit2').DataTable({
+        'paging': true,
+        'columnDefs': [{
+            'searchable': false,
+            'targets': [0, 3]
+        }, ]
+    });
+</script>
 
 <?= $this->endSection(); ?>

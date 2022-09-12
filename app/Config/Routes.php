@@ -86,6 +86,7 @@ $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/gejala', 'Gejala::index');
 $routes->get('/penyakit', 'Penyakit::index');
 
+$routes->get('/home/pasien', 'Home::profile');
 
 $routes->get('/konsultasi', 'Konsultasi::index');
 $routes->post('/konsultasi', 'Konsultasi::konsul');
@@ -99,7 +100,7 @@ $routes->get('/konsultasi/(:num)', 'Konsultasi::hasil/$1');
 $routes->get('/makanan', 'Makanan::index');
 
 // data api
-$routes->post('/home/data-gejala', 'Home::dataGejala');
+// $routes->post('/home/data-gejala', 'Home::dataGejala');
 
 /*
 * --------------------------------------------------------------------

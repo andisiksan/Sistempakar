@@ -1,40 +1,24 @@
 <?= $this->extend('home/layout'); ?>
 <?= $this->section('content'); ?>
 
-<div class="wrapper main" id="main_utama">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-lg-5">
-                <div id="carouselStandar" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="<?= base_url() ?>/img/gambar_1.png" alt="" width="100%" id="foto">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="<?= base_url() ?>/img/gambar2.jpg" alt="" width="100%" id="foto">
-                            <!-- <img src="dk3.png" class="d-block w-100" alt="gambar"> -->
-                        </div>
-                    </div>
+<section id="banner">
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="<?= base_url() ?>/img/hero2.png" class="ban-img img-fluid" alt="">
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-7">
-                <h2 class="font-weight-bold text-white text-uppercase mt-4">Rekomendasi Larangan Makanan berdasarkan JEnis
-                    penyakit menggunakan metode forward chaining & certainty factor </h2>
-                <div class="mt-4">
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="<?= base_url('/konsultasi'); ?>" class="btn btn-success button1">
-                                <i class="fa fa-play"></i> Konsultasi
-                            </a>
-                        </div>
-                    </div>
-
-
-
+                <div class="col-md-6" id="caption">
+                    <h2 class="title font-weight-bold text-white text-uppercase ">RANCANG BANGUN APLIKASI</h2>
+                    <h5 class="font-weight-bold text-capitalize">REKOMENDASI DAN LARANGAN MAKANAN BERDASARKAN JENIS PENYAKIT MENGGUNAKAN METODE CERTAINTY FACTOR DAN FORWARD CHAINING </h5>
+                    <a href="<?= base_url('/konsultasi'); ?>" class="btn btn-success button1 mt-4">
+                        <i class="fa fa-play"></i> Konsultasi
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <img src="<?= base_url() ?>/img/wave4.svg" class="wave" alt="">
+</section>
 
 <?= $this->endSection(); ?>

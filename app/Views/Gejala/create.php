@@ -7,7 +7,7 @@
             <div class="col-8 mb-4">
                 <form action="<?= base_url(); ?>/gejala/save" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
-                    <label for="namaGejala">Masukkan Gejala</label>
+                    <label for="namaGejala">Nama Gejala</label>
                     <input type="text" name="namaGejala" class="form-control" id="namaGejala">
 
                     <div class="form-group">
